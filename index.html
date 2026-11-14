@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Takundanashe Mupambo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500;600&display=swap">
+
+<style>
+:root {
+  --bg-deep:    #0d1117;
+  --bg-card:    #161b22;
+  --bg-sidebar: #0f1520;
+  --bg-tile:    #1a2235;
+  --accent:     #2E5FA3;
+  --accent-soft:#5a90d9;
+  --fg:         #c9d1d9;
+  --fg-heading: #e6edf3;
+  --fg-muted:   #7d8590;
+  --border:     #21262d;
+  --radius:     10px;
+  --ease:       cubic-bezier(0.25,0.46,0.45,0.94);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-deep:    #f5f7fa;
+    --bg-card:    #ffffff;
+    --bg-sidebar: #1B2A4A;
+    --bg-tile:    #eef2f8;
+    --accent:     #2E5FA3;
+    --accent-soft:#1a4a8a;
+    --fg:         #24292f;
+    --fg-heading: #0d1117;
+    --fg-muted:   #57606a;
+    --border:     #d0d7de;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg-deep:    #f5f7fa;
+  --bg-card:    #ffffff;
+  --bg-sidebar: #1B2A4A;
+  --bg-tile:    #eef2f8;
+  --accent:     #2E5FA3;
+  --accent-soft:#1a4a8a;
+  --fg:         #24292f;
+  --fg-heading: #0d1117;
+  --fg-muted:   #57606a;
+  --border:     #d0d7de;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--fg);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.main { min-width: 0; }
+
+/* ── DESKTOP NAV ── */
+.desktop-nav {
+  position: sticky;
+  top: 0;
+  background: rgba(13,17,23,0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  z-index: 10;
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: flex-end;
+  padding: 0.85rem max(2.25rem, env(safe-area-inset-right,0px)) 0.85rem max(2.25rem, env(safe-area-inset-left,0px));
+}
+.nav-links { display: flex; gap: 1.75rem; }
+.nav-link {
+  font-size: 0.78rem; font-weight: 500;
+  color: var(--fg-muted); text-decoration: none;
+  letter-spacing: 0.04em;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--fg-heading);
+  border-bottom-color: var(--accent);
+}
+
+/* ── MOBILE NAV ── */
+.mobile-nav { display: none; }
+
+/* ── SECTIONS ── */
+section {
+  padding: 3.75rem max(2.25rem, env(safe-area-inset-right,0px));
+  padding-left: max(2.25rem, env(safe-area-inset-left,0px));
+  border-bottom: 1px solid var(--border);
+}
+.eyebrow {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent-soft); margin-bottom: 0.5rem;
+}
+.section-h {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.85rem; font-weight: 400;
+  color: var(--fg-heading); line-height: 1.3;
+  text-wrap: balance; margin-bottom: 2rem;
+}
+
+/* ── ABOUT ── */
+.about-mobile-header { display: none; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 3rem;
+  align-items: center;
+}
+.about-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: 50% 14%;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  box-shadow: 0 12px 40px rgba(46,95,163,0.25);
+  display: block;
+  transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.about-photo:hover {
+  box-shadow: 0 0 0 6px rgba(46,95,163,0.4), 0 12px 40px rgba(46,95,163,0.25);
+  transform: scale(1.02);
+}
+@media (max-width: 1000px) {
+  .about-grid { grid-template-columns: minmax(0, 1fr) 240px; gap: 2rem; }
+}
+
+.about-bio {
+  max-width: 600px;
+  font-size: 0.95rem; line-height: 1.8;
+  color: var(--fg); margin-bottom: 2.5rem;
+}
+
+.ot-label {
+  font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fg-muted); margin-bottom: 0.9rem;
+}
+
+/* ── OPEN TO — COVERFLOW CAROUSEL ── */
+.ot-scene {
+  --tw: 250px; --th: 124px;
+  position: relative;
+  perspective: 1100px;
+  height: 200px;
+  width: 100%;
+  max-width: 640px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+.ot-scene.in { opacity: 1; }
+.ot-scene::before {
+  content: ""; position: absolute; left: 50%; top: 42%;
+  width: 360px; height: 180px; transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(46,95,163,0.28), transparent);
+  pointer-events: none;
+}
+.ot-stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+
+.ot-tile {
+  position: absolute; top: 42%; left: 50%;
+  width: var(--tw); height: var(--th);
+  margin: calc(var(--th) / -2) 0 0 calc(var(--tw) / -2);
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 0.7rem 0.95rem 0.85rem;
+  text-align: left;
+  background: linear-gradient(160deg, var(--bg-card), var(--bg-tile));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform 0.8s var(--ease), opacity 0.8s var(--ease), filter 0.8s var(--ease),
+              box-shadow 0.8s var(--ease), border-color 0.8s var(--ease);
+  will-change: transform;
+}
+.ot-tile[data-pos="0"]  { transform: translateX(0) translateZ(0) rotateY(0) scale(1); opacity: 1; z-index: 3; cursor: default;
+  border-color: var(--accent); box-shadow: 0 16px 44px rgba(46,95,163,0.38); }
+.ot-tile[data-pos="-1"] { transform: translateX(-66%) translateZ(-120px) rotateY(34deg) scale(0.86); opacity: 0.5; z-index: 1; filter: blur(1.2px); }
+.ot-tile[data-pos="1"]  { transform: translateX(66%) translateZ(-120px) rotateY(-34deg) scale(0.86); opacity: 0.5; z-index: 1; filter: blur(1.2px); }
+.ot-tile[data-pos="-1"]:hover, .ot-tile[data-pos="1"]:hover { opacity: 0.75; }
+
+.ot-bar { display: flex; align-items: center; gap: 5px; }
+.ot-bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--border); display: block; }
+.ot-bar i:nth-child(1) { background: #ff5f57; opacity: 0.85; }
+.ot-bar i:nth-child(2) { background: #febc2e; opacity: 0.85; }
+.ot-bar i:nth-child(3) { background: #28c840; opacity: 0.85; }
+.ot-idx {
+  margin-left: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem; letter-spacing: 0.08em; color: var(--fg-muted);
+}
+.ot-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.02rem; font-weight: 600; line-height: 1.3;
+  color: var(--fg-heading);
+}
+
+.ot-dots {
+  position: absolute; left: 0; right: 0; bottom: 6px; z-index: 5;
+  display: flex; justify-content: center; gap: 7px;
+}
+.ot-dot {
+  width: 7px; height: 7px; padding: 0; border: 0; border-radius: 99px;
+  background: var(--border); cursor: pointer;
+  transition: width 0.4s var(--ease), background 0.4s var(--ease);
+}
+.ot-dot.on { width: 24px; background: var(--accent); }
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+}
+
+.skill-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  transition: box-shadow 0.3s var(--ease), border-color 0.3s ease, transform 0.3s var(--ease);
+}
+.skill-card:hover {
+  box-shadow: 0 8px 28px rgba(46,95,163,0.2);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.skill-card-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.92rem; font-weight: 600;
+  color: var(--fg-heading); line-height: 1.3;
+  margin-bottom: 0.85rem;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag {
+  font-size: 0.69rem; font-weight: 500;
+  color: var(--fg-muted);
+  background: var(--bg-tile);
+  border: 1px solid var(--border);
+  border-radius: 20px; padding: 0.18rem 0.6rem;
+  letter-spacing: 0.02em;
+  transition: color 0.2s, border-color 0.2s;
+}
+.skill-card:hover .tag {
+  color: var(--fg);
+  border-color: rgba(46,95,163,0.4);
+}
+
+/* ── EXPERIENCE ── */
+.exp-col { display: flex; flex-direction: column; gap: 1.25rem; max-width: 860px; }
+.exp-meta { font-size: 0.74rem; color: var(--accent-soft); letter-spacing: 0.03em; margin: -0.25rem 0 0.9rem; }
+.exp-list { list-style: none; margin-bottom: 1.1rem; display: flex; flex-direction: column; gap: 0.55rem; }
+.exp-list li {
+  position: relative; padding-left: 1.1rem;
+  font-size: 0.85rem; color: var(--fg-muted); line-height: 1.7;
+}
+.exp-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.72em;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+.exp-list code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.76rem; color: var(--fg);
+  background: var(--bg-tile); border: 1px solid var(--border);
+  border-radius: 4px; padding: 0.05rem 0.35rem;
+}
+.exp-list strong { color: var(--fg); font-weight: 600; }
+
+/* ── PROJECTS ── */
+.projects-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.proj-card { display: flex; flex-direction: column; }
+.proj-card .proj-tags { margin-top: auto; }
+.proj-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.75rem;
+  transition: box-shadow 0.3s var(--ease), border-color 0.3s ease, transform 0.3s var(--ease);
+}
+.proj-card:hover {
+  box-shadow: 0 8px 28px rgba(46,95,163,0.2);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.proj-header {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+.proj-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem; font-weight: 600;
+  color: var(--fg-heading); line-height: 1.3;
+}
+.proj-badge {
+  font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent-soft);
+  background: rgba(46,95,163,0.1);
+  border: 1px solid rgba(46,95,163,0.28);
+  border-radius: 20px; padding: 0.2rem 0.65rem;
+  white-space: nowrap; flex-shrink: 0;
+  margin-top: 2px;
+}
+.proj-desc {
+  font-size: 0.85rem; color: var(--fg-muted);
+  line-height: 1.75; margin-bottom: 1rem;
+}
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.proj-tag {
+  font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  background: var(--bg-tile);
+  border: 1px solid var(--border);
+  border-radius: 4px; padding: 0.18rem 0.5rem;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg-sidebar);
+  padding: 2.25rem max(2.25rem, env(safe-area-inset-right,0px));
+  padding-left: max(2.25rem, env(safe-area-inset-left,0px));
+  padding-bottom: max(2.25rem, env(safe-area-inset-bottom,0px));
+}
+.footer-row {
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: space-between;
+  gap: 1.25rem 2rem;
+}
+.footer-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem; font-weight: 600;
+  color: #e6edf3; letter-spacing: 0.05em;
+}
+.footer-links {
+  display: flex; flex-wrap: wrap;
+  align-items: center; gap: 0.6rem 1.5rem;
+}
+.f-link {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.75rem; color: #7d8fa8;
+  text-decoration: none;
+  transition: color 0.2s;
+  user-select: text;
+}
+.f-link:hover { color: var(--accent-soft); }
+.f-link svg { width: 13px; height: 13px; fill: currentColor; flex-shrink: 0; }
+
+.cv-btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 600;
+  color: #fff; background: var(--accent);
+  border-radius: 7px; padding: 0.45rem 1.05rem;
+  text-decoration: none; letter-spacing: 0.02em;
+  transition: background 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.cv-btn:hover { background: #3a72c0; transform: translateY(-1px); }
+.cv-btn svg { width: 13px; height: 13px; fill: currentColor; }
+
+/* ── PHOTO LIGHTBOX ── */
+.about-photo, .mob-avatar { cursor: zoom-in; }
+.lightbox {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  background: rgba(5,8,13,0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s var(--ease), visibility 0s linear 0.35s;
+}
+.lightbox.open {
+  opacity: 1; visibility: visible;
+  transition: opacity 0.35s var(--ease), visibility 0s;
+}
+.lightbox img {
+  max-width: min(92vw, 680px);
+  max-height: 90vh;
+  width: auto; height: auto;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  transform: scale(0.6);
+  opacity: 0;
+  transition: transform 0.45s var(--ease), opacity 0.35s var(--ease), border-radius 0.45s var(--ease);
+  cursor: default;
+}
+.lightbox.open img { transform: scale(1); opacity: 1; border-radius: 12px; }
+body.lb-open { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .lightbox, .lightbox img { transition: none !important; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .desktop-nav { display: none; }
+
+  .mobile-nav {
+    display: flex; align-items: center; justify-content: center;
+    position: sticky; top: 0;
+    background: rgba(13,17,23,0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    z-index: 20;
+    padding: 0.85rem 1rem;
+  }
+  .mob-links { display: flex; gap: 1.1rem; }
+  .mob-link {
+    font-size: 0.76rem; font-weight: 500;
+    color: var(--fg-muted); text-decoration: none;
+    letter-spacing: 0.04em; transition: color 0.2s;
+  }
+  .mob-link:hover { color: var(--fg-heading); }
+
+  .about-grid { display: block; }
+  .about-photo { display: none; }
+  .about-mobile-header {
+    display: flex; align-items: flex-start; gap: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  .mob-avatar {
+    width: 70px; height: 70px; border-radius: 50%;
+    border: 3px solid var(--accent);
+    background: linear-gradient(135deg, var(--accent) 0%, #1B2A4A 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem; font-weight: 600; color: #fff;
+    flex-shrink: 0; cursor: default; overflow: hidden;
+    transition: box-shadow 0.3s var(--ease);
+  }
+  .mob-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; display: block; }
+  .mob-avatar:hover { box-shadow: 0 0 0 4px rgba(46,95,163,0.4); }
+  .mob-name-block { flex: 1; min-width: 0; }
+  .mob-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.2rem; font-weight: 600;
+    color: var(--fg-heading); line-height: 1.2;
+    margin-bottom: 0.2rem;
+  }
+  .mob-role { font-size: 0.74rem; color: var(--accent-soft); letter-spacing: 0.03em; }
+
+  .ot-scene { --tw: 210px; --th: 118px; }
+  .ot-name { font-size: 0.95rem; }
+  .skills-grid, .projects-col { grid-template-columns: 1fr; }
+
+  section {
+    padding: 2.5rem max(1rem, env(safe-area-inset-right,0px));
+    padding-left: max(1rem, env(safe-area-inset-left,0px));
+  }
+  footer {
+    padding-left: max(1rem, env(safe-area-inset-left,0px));
+    padding-right: max(1rem, env(safe-area-inset-right,0px));
+  }
+  .section-h { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ot-tile, .ot-dot { transition: none !important; }
+  .skill-card, .proj-card { transition: none !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile nav -->
+<nav class="mobile-nav" aria-label="Site navigation">
+  <div class="mob-links">
+    <a href="#skills" class="mob-link">Skills</a>
+    <a href="#experience" class="mob-link">Experience</a>
+    <a href="#projects" class="mob-link">Projects</a>
+    <a href="#contact" class="mob-link">Get in touch</a>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- Desktop nav -->
+  <nav class="desktop-nav" aria-label="Site navigation">
+    <div class="nav-inner">
+      <div class="nav-links">
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Get in touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <!-- Mobile only header -->
+    <div class="about-mobile-header">
+      <div class="mob-avatar"><img src="profile.jpg" alt="Takundanashe Mupambo"></div>
+      <div class="mob-name-block">
+        <div class="mob-name">Takundanashe Mupambo</div>
+        <div class="mob-role">Cybersecurity Analyst &amp; AI Specialist</div>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+    <p class="eyebrow">About</p>
+    <h2 class="section-h">I find vulnerabilities,<br>train models, defend systems.</h2>
+    <p class="about-bio">
+      I am Takundanashe Mupambo, a Computer Science &amp; Engineering graduate from Lovely Professional University.
+      I specialise in penetration testing, cybersecurity defence, and AI model training.
+    </p>
+
+    <p class="ot-label">Open to</p>
+    <div class="ot-scene" id="otScene" role="region" aria-label="Open to">
+      <div class="ot-stage">
+        <div class="ot-tile" tabindex="0"><div class="ot-bar"><i></i><i></i><i></i><span class="ot-idx">01 / 03</span></div><div class="ot-name">AI Model Training</div></div>
+        <div class="ot-tile" tabindex="0"><div class="ot-bar"><i></i><i></i><i></i><span class="ot-idx">02 / 03</span></div><div class="ot-name">Cybersecurity Analyst &amp; AI Specialist</div></div>
+        <div class="ot-tile" tabindex="0"><div class="ot-bar"><i></i><i></i><i></i><span class="ot-idx">03 / 03</span></div><div class="ot-name">Network Security &amp; Penetration Testing</div></div>
+      </div>
+      <div class="ot-dots" role="tablist" aria-label="Open to roles"></div>
+    </div>
+      </div>
+      <img class="about-photo" src="profile.jpg" alt="Takundanashe Mupambo in a navy suit">
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="eyebrow">Skills</p>
+    <h2 class="section-h">What I work with</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <h3 class="skill-card-title">Network &amp; Packet Analysis</h3>
+        <div class="tags">
+          <span class="tag">Wireshark</span><span class="tag">Tcpdump</span>
+          <span class="tag">Nmap</span><span class="tag">Masscan</span>
+          <span class="tag">Netcat</span><span class="tag">Wifite</span>
+          <span class="tag">Bettercap</span><span class="tag">Ettercap</span>
+          <span class="tag">Wifiphisher</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3 class="skill-card-title">Firewalls &amp; Security Testing</h3>
+        <div class="tags">
+          <span class="tag">Iptables</span><span class="tag">UFW</span>
+          <span class="tag">Nessus</span><span class="tag">Metasploit</span>
+          <span class="tag">Burp Suite</span><span class="tag">Postman</span>
+          <span class="tag">Nikto</span><span class="tag">WPScan</span>
+          <span class="tag">Assetfinder</span><span class="tag">ffuf</span>
+          <span class="tag">Sqlmap</span><span class="tag">Subfinder</span>
+          <span class="tag">EyeWitness</span>
+          <span class="tag">Strings</span><span class="tag">Eclipse MAT</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3 class="skill-card-title">Programming, Automation &amp; OS</h3>
+        <div class="tags">
+          <span class="tag">Python Scripting</span><span class="tag">Bash Scripting</span>
+          <span class="tag">Java</span><span class="tag">C++</span>
+          <span class="tag">PHP</span><span class="tag">Kali Linux</span>
+          <span class="tag">Windows</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3 class="skill-card-title">Machine Learning &amp; AI</h3>
+        <div class="tags">
+          <span class="tag">PyTorch</span><span class="tag">TensorFlow</span>
+          <span class="tag">Computer Vision (YOLO)</span><span class="tag">OpenCV</span>
+          <span class="tag">NEAT</span><span class="tag">NLP</span>
+          <span class="tag">Sentiment Analysis</span>
+          <span class="tag">Linear Regression</span><span class="tag">Logistic Regression</span>
+          <span class="tag">PCA</span><span class="tag">Naive Bayes</span>
+          <span class="tag">Decision Trees</span><span class="tag">Random Forest</span>
+          <span class="tag">k-NN</span><span class="tag">SVM</span>
+          <span class="tag">K-Means</span><span class="tag">DBSCAN</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3 class="skill-card-title">Core Domain</h3>
+        <div class="tags">
+          <span class="tag">Threat Hunting</span><span class="tag">Penetration Testing</span>
+          <span class="tag">Access Control</span><span class="tag">IDS/IPS</span>
+          <span class="tag">Log Auditing</span>
+          <span class="tag">Machine Learning</span><span class="tag">AI Model Training</span>
+          <span class="tag">Computer Vision</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h3 class="skill-card-title">Professional &amp; Soft Skills</h3>
+        <div class="tags">
+          <span class="tag">Problem Solving</span><span class="tag">Security Documentation</span>
+          <span class="tag">Report Writing</span><span class="tag">Team Collaboration</span>
+          <span class="tag">Clear Communication</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="eyebrow">Experience</p>
+    <h2 class="section-h">Hands-on security work</h2>
+    <div class="exp-col">
+
+      <article class="proj-card">
+        <div class="proj-header">
+          <h3 class="proj-name">Independent Vulnerability Research</h3>
+          <span class="proj-badge">Ongoing</span>
+        </div>
+        <p class="exp-meta">Web application &amp; API assessments · live production targets</p>
+        <ul class="exp-list">
+          <li>Found exposed Spring Boot Actuator endpoints (<code>/actuator/env</code>, <code>/actuator/heapdump</code>) on live financial systems, leaking environment variables, credentials and heap memory.</li>
+          <li>Analysed downloaded <strong>JVM heap dumps</strong> with <code>strings</code> and <strong>Eclipse Memory Analyzer (MAT)</strong> to extract live session JWTs and password hashes, demonstrating session hijacking and offline cracking risk.</li>
+          <li>Discovered unprotected REST APIs exposing the <strong>PII of millions of users</strong>, including national IDs, phone numbers, addresses and dates of birth.</li>
+          <li>Reached sensitive transaction records and fund-transfer functions with no authentication or authorisation checks.</li>
+          <li>Mapped internal endpoints and data models through unprotected <code>/v3/api-docs</code> (OpenAPI) schemas.</li>
+          <li>Ran IIS 8.3 shortname enumeration with WAF bypass (tilde-encoding variants, HTTP method rotation, header injection) and built a Python scanner to automate it.</li>
+          <li>Performed passive DNS recon, certificate transparency analysis and Cloudflare origin IP discovery during black-box engagements.</li>
+          <li>Documented every finding in structured pentest reports with CVSS scores, reproduction evidence, risk ratings and remediation advice.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="proj-tag">Burp Suite</span>
+          <span class="proj-tag">Postman</span>
+          <span class="proj-tag">Strings</span>
+          <span class="proj-tag">Eclipse MAT</span>
+          <span class="proj-tag">Nmap</span>
+          <span class="proj-tag">Subfinder</span>
+          <span class="proj-tag">Python</span>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div class="proj-header">
+          <h3 class="proj-name">Wireless Security Assessment</h3>
+          <span class="proj-badge">2024</span>
+        </div>
+        <p class="exp-meta">Independent research</p>
+        <ul class="exp-list">
+          <li>Assessed Wi-Fi security through WPA2 handshake capture, client de-authentication and wireless network enumeration.</li>
+          <li>Experimented with <strong>Wifiphisher</strong>: de-authenticated users, broadcast a rogue access point and showed how Wi-Fi passwords can be captured when clients try to log in to it (evil-twin attack).</li>
+          <li>Analysed wireless traffic in Wireshark to spot cleartext credentials and protocol weaknesses.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="proj-tag">Wifiphisher</span>
+          <span class="proj-tag">Wifite</span>
+          <span class="proj-tag">Wireshark</span>
+          <span class="proj-tag">WPA2</span>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div class="proj-header">
+          <h3 class="proj-name">OWASP Juice Shop</h3>
+          <span class="proj-badge">Practice Lab</span>
+        </div>
+        <p class="exp-meta">Penetration testing practice</p>
+        <ul class="exp-list">
+          <li>Penetration-tested the intentionally vulnerable OWASP Juice Shop application to sharpen OWASP Top 10 techniques in a safe environment.</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="proj-tag">OWASP Top 10</span>
+          <span class="proj-tag">Burp Suite</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="eyebrow">Projects</p>
+    <h2 class="section-h">Things I've built</h2>
+    <div class="projects-col">
+
+      <article class="proj-card">
+        <div class="proj-header">
+          <h3 class="proj-name">News Recommendation System</h3>
+          <span class="proj-badge">Machine Learning</span>
+        </div>
+        <p class="proj-desc">
+          Built a content-based recommendation engine for news articles. The goal was to explore personalisation techniques and improve how relevant content is surfaced to readers based on their interests.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">NLP</span>
+          <span class="proj-tag">Recommendation Systems</span>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div class="proj-header">
+          <h3 class="proj-name">Pentest Tracker</h3>
+          <span class="proj-badge">Work in Progress</span>
+        </div>
+        <p class="proj-desc">
+          Developed as a personal solution to the limitations of CherryTree — which was prone to crashing and losing notes at critical moments. This tool is designed to be a reliable, structured environment for documenting penetration testing findings. Currently in active development and testing.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Security Tooling</span>
+        </div>
+      </article>
+
+      <article class="proj-card">
+        <div class="proj-header">
+          <h3 class="proj-name">Object Detection &amp; Avoidance</h3>
+          <span class="proj-badge">Computer Vision</span>
+        </div>
+        <p class="proj-desc">
+          Experimented with lightweight algorithms for object detection and avoidance, exploring how AI vision problems can be solved with minimal computational overhead — reducing memory usage without sacrificing accuracy.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">OpenCV</span>
+          <span class="proj-tag">YOLO</span>
+          <span class="proj-tag">NEAT</span>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- FOOTER / CONTACT -->
+  <footer id="contact">
+    <div class="footer-row">
+      <span class="footer-name">Takundanashe Mupambo</span>
+      <div class="footer-links">
+        <span class="f-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          takundanashemupambo@gmail.com
+        </span>
+        <span class="f-link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          +263 714 636 602
+        </span>
+        <a href="https://github.com/Takundanashe" class="f-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/takundanashe-mupambo-871770252" class="f-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="cv_updated.pdf" class="cv-btn" target="_blank">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 15h8v2H8zm0-4h8v2H8zm0-4h5v2H8z"/></svg>
+          View Résumé
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<!-- Photo lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <img src="profile-full.jpg" alt="Takundanashe Mupambo">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const scene = document.getElementById('otScene');
+  if (scene) setTimeout(() => scene.classList.add('in'), 300);
+
+  // Scroll-spy for desktop nav (Skills / Projects)
+  const sections = Array.from(document.querySelectorAll('section[id], footer[id]'));
+  const links = document.querySelectorAll('.nav-link');
+
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.toggle('active', l.hash === '#' + e.target.id));
+        }
+      });
+    }, { threshold: 0.45 });
+    sections.forEach(s => spy.observe(s));
+  }
+
+
+  // Open-to coverflow carousel
+  const otTiles = Array.from(document.querySelectorAll('.ot-tile'));
+  const otDotsWrap = document.querySelector('.ot-dots');
+  if (otTiles.length && otDotsWrap) {
+    const n = otTiles.length;
+    let cur = 0, timer = null;
+    const dots = otTiles.map((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'ot-dot'; d.type = 'button';
+      d.setAttribute('aria-label', 'Show item ' + (i + 1));
+      d.addEventListener('click', () => { go(i); restart(); });
+      otDotsWrap.appendChild(d); return d;
+    });
+    function render() {
+      otTiles.forEach((t, i) => {
+        const pos = (((i - cur + n + 1) % n) + n) % n - 1;
+        t.dataset.pos = pos;
+        t.setAttribute('aria-hidden', pos !== 0);
+      });
+      dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+    }
+    function go(i) { cur = (i + n) % n; render(); }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function stop() { clearInterval(timer); timer = null; }
+    function start() { if (!reduce && !timer) timer = setInterval(() => go(cur + 1), 3200); }
+    function restart() { stop(); start(); }
+    otTiles.forEach((t, i) => {
+      t.addEventListener('click', () => { if (i !== cur) { go(i); restart(); } });
+      t.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(i); restart(); } });
+    });
+    const sceneEl = document.getElementById('otScene');
+    sceneEl.addEventListener('mouseenter', stop);
+    sceneEl.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    render(); start();
+  }
+
+  // Photo lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img');
+  const openLb = () => { lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); document.body.classList.add('lb-open'); };
+  const closeLb = () => { lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); document.body.classList.remove('lb-open'); };
+  document.querySelectorAll('.about-photo, .mob-avatar').forEach(el => el.addEventListener('click', openLb));
+  lb.addEventListener('click', e => { if (e.target !== lbImg) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  // Show mobile header only on small screens
+  const mobileHeader = document.querySelector('.about-mobile-header');
+  const updateMobileHeader = () => {
+    if (mobileHeader) mobileHeader.style.display = window.innerWidth <= 800 ? 'flex' : 'none';
+  };
+  updateMobileHeader();
+  window.addEventListener('resize', updateMobileHeader, { passive: true });
+});
+</script>
+
+</body>
+</html>
